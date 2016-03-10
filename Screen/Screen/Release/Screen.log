@@ -1,0 +1,19 @@
+﻿Build started 2016/3/10 21:14:00.
+     1>Project "D:\Gits\cpluspluspractice\Screen\Screen\Screen.vcxproj" on node 2 (Build target(s)).
+     1>PrepareForBuild:
+         Creating directory "D:\Gits\cpluspluspractice\Screen\Release\".
+         Creating directory "Release\Screen.tlog\".
+       InitializeBuildStatus:
+         Creating "Release\Screen.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         E:\vs2013\VC\bin\CL.exe /c /I"F:\公司\Visual Leak Detector\include" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp Screen.cpp
+         main.cpp
+     1>main.cpp(5): error C2065: 'Screen' : undeclared identifier
+     1>main.cpp(5): error C2065: 'sc' : undeclared identifier
+     1>main.cpp(6): error C3861: 'system': identifier not found
+         Screen.cpp
+     1>Done Building Project "D:\Gits\cpluspluspractice\Screen\Screen\Screen.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.18
