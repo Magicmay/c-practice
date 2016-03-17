@@ -1,0 +1,12 @@
+﻿Build started 2016/3/17 19:27:06.
+     1>Project "D:\Gits\cpluspluspractice\16.34\16.34\16.34.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "Debug\16.34.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+       FinalizeBuildStatus:
+         Deleting file "Debug\16.34.tlog\unsuccessfulbuild".
+         Touching "Debug\16.34.tlog\16.34.lastbuildstate".
+     1>Done Building Project "D:\Gits\cpluspluspractice\16.34\16.34\16.34.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.24
