@@ -1,6 +1,6 @@
 #ifndef SALESITEM_H
 #define SALESITEM_H
-
+#include <windows.h>
 #include "Handle.h"
 #include "Item.h"
 class Sales_item
