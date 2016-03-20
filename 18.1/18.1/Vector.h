@@ -3,7 +3,7 @@
 #pragma warning(disable:4996)
 #include <memory>
 #include <cstddef>
-#include <algorithm>
+//#include <algorithm>
 size_t max(size_t a, size_t b)
 {
 	return a > b ? a : b;
@@ -55,22 +55,27 @@ template <class T> void Vector<T>::push_back(const T& t)
 	{
 		reallocate();
 	}
-	alloc.construct(first_free, t);
+//	alloc.construct(first_free, t);
+	new (first_free) T(t);
 	++first_free;
 }
 template <class T> void Vector<T>::reallocate()
 {
 	ptrdiff_t size = first_free - elements;
 	ptrdiff_t newcapacity = 2 * max(size, 1);
-	T* newelements = alloc.allocate(newcapacity);
+//	T* newelements = alloc.allocate(newcapacity);
+	T* newelements = static_cast<T*>
+		(operator new[](newcapacity*sizeof(T)));
 	uninitialized_copy(elements, first_free, newelements);
 	for (T *p = first_free; p != elements;/*empty*/)
 	{
-		alloc.destroy(--p);
+	//	alloc.destroy(--p);
+		(--p)->~T();
 	}
 	if (elements)
 	{
-		alloc.deallocate(elements, end - elements);
+	//	alloc.deallocate(elements, end - elements);
+		operator delete[](elements);
 	}
 	elements = newelements;
 	first_free = elements + size;
@@ -80,7 +85,9 @@ template <class T>
 void Vector<T>::reserve(const size_t capa)
 {
 	size_t size = first_free - elements;
-	T* newelements = alloc.allocate(capa);
+//	T* newelements = alloc.allocate(capa);
+	T* newelements = static_cast<T*>
+		(operator new[](capa*sizeof(T)));
 	if (size <= capa)
 	{
 		uninitialized_copy(elements, first_free, newelements);
@@ -89,11 +96,13 @@ void Vector<T>::reserve(const size_t capa)
 		uninitialized_copy(elements, elements + capa, newelements);
 	for (T *p = first_free; p != elements; )
 	{
-		alloc.destroy(--p);
+	//	alloc.destroy(--p);
+		(--p)->~T();
 	}
 	if (elements)
 	{
-		alloc.deallocate(elements, end - elements);
+	//	alloc.deallocate(elements, end - elements);
+		operator delete[](elements);
 	}
 	elements = newelements;
 	first_free = elements + min(size, capa);
@@ -116,7 +125,8 @@ void Vector<T>::resize(const size_t n)
 	else
 		for (T *p = first_free; p != elements + n; )
 		{
-			alloc.destroy(--p);
+		//	alloc.destroy(--p);
+			(--p)->~T();
 		}
 	first_free = elements + n;
 }
@@ -136,7 +146,8 @@ void Vector<T>::resize(const size_t n, const T& t)
 	}
 	else
 		for (T *p = first_free; p != elements + n;)
-			alloc.destroy(--p);
+			//	alloc.destroy(--p);
+			(--p)->~T();
 	first_free = elements + n;
 }
 template <class T>
